@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { FeatureModule } from '../feature/feature.module';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
+    SharedModule,
+    FeatureModule,
     CommonModule
   ]
 })
