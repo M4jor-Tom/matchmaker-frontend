@@ -10,5 +10,5 @@ const defaultValue: Readonly<SolStarChartModel> = {
 }
 
 export function cloneDefaultValue(): Readonly<SolStarChartModel> {
-    return cloneObject(defaultValue);
+    return cloneObject<Readonly<SolStarChartModel>>(defaultValue);
 }
