@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import * as sscm from 'src/app/model/sol-star-chart-model'
+import { CompatClient, Stomp } from "@stomp/stompjs"
+import * as nm from 'src/app/model/node-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelReadService {
 
-  constructor() { }
+  public constructor() {
+    
+  }
 
-  public getSolStarChartModelSubject(): BehaviorSubject<sscm.SolStarChartModel> {
+  public getNodeModelSubject(): BehaviorSubject<nm.NodeModel> {
     //  [TODO] Unmock
-    return new BehaviorSubject<sscm.SolStarChartModel>(sscm.cloneDefaultValue());
+    return new BehaviorSubject<nm.NodeModel>(nm.cloneDefaultValue());
   }
 }
