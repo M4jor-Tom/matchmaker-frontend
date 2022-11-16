@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CompatClient, Stomp } from "@stomp/stompjs"
 import * as nm from 'src/app/model/node-model';
 
 @Injectable({
