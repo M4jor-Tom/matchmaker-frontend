@@ -29,7 +29,7 @@ export class ModelReadService {
   public wsConnect(brokerUrl: string): void {
     const self: ModelReadService = this;
     this.stompClient.configure({
-      onConnect: function(fame: any) {
+      onConnect: function(frame: any) {
         self.stompClient.subscribe(brokerUrl, function(message: Message) {
           self.subject.next(JSON.parse(ModelReadService.decodeMessage(message)));
         });
