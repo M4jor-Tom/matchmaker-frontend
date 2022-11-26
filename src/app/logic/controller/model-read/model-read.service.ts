@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CompatClient, Message, Stomp } from "@stomp/stompjs"
 import * as SockJS from 'sockjs-client';
-import { NodeModel } from 'src/app/model/node-model';
+import { NodeModel } from 'src/app/logic/model/interface/node-model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,13 @@
-import { cloneObject } from "../utils/data-manipulation";
+import { cloneObject } from "src/app/utils/data-manipulation";
+import { NodeId } from "../enum/node-id";
 
 export interface NodeModel {
+    nodeId: NodeId,
     name: string
 }
 
 export const defaultValue: Readonly<NodeModel> = {
+    nodeId: NodeId.NO_ID,
     name: ""
 }
 
