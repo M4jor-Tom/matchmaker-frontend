@@ -1,4 +1,4 @@
-import { cloneObject } from "../utils/data-manipulation";
+import { cloneObject } from "src/app/utils/data-manipulation";
 import * as nm from "./node-model";
 
 export interface SolStarChartModel {
