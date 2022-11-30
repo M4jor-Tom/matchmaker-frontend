@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModelReadService } from './model-read.service';
+import { WebsocketService } from './websocket.service';
 
 describe('ModelReadService', () => {
-  let service: ModelReadService;
+  let service: WebsocketService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ModelReadService);
+    service = TestBed.inject(WebsocketService);
   });
 
   it('should be created', () => {
