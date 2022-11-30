@@ -32,6 +32,31 @@ export class ModelReadService {
 
   }
 
+  //  USER ACCESSIBLE FUNCTIONALITIES  --  START
+  
+  //Write
+  public subscribeToNodeOfId(nodeId: NodeId): void {
+    this.sendNodeSubscription({
+      nodeId: nodeId,
+      ifTrueAddElseRemove: true
+    });
+  }
+
+  //Write
+  public unsubscribeFromNodeOfId(nodeId: NodeId): void {
+    this.sendNodeSubscription({
+      nodeId: nodeId,
+      ifTrueAddElseRemove: false
+    });
+  }
+
+  //Read
+  public get getNodeModelSubject(): Subject<NodeModel> {
+    return this.subject;
+  }
+
+  //  USER ACCESSIBLE FUNCTIONALITIES  --  END
+
   public wsConnect(): void {
     const self: ModelReadService = this;
     this.stompClient.configure({
@@ -44,26 +69,8 @@ export class ModelReadService {
     this.stompClient.activate();
   }
 
-  public subscribeToNodeOfId(nodeId: NodeId): void {
-    this.sendNodeSubscription({
-      nodeId: nodeId,
-      ifTrueAddElseRemove: true
-    });
-  }
-
-  public unsubscribeFromNodeOfId(nodeId: NodeId): void {
-    this.sendNodeSubscription({
-      nodeId: nodeId,
-      ifTrueAddElseRemove: false
-    });
-  }
-
   private sendNodeSubscription(nodeSubscription: NodeSubscription): void {
     this.stompClient.send(ModelReadService.WEBSOCKET_DESTINATION_URL, {}, JSON.stringify(nodeSubscription));
-  }
-
-  public get getNodeModelSubject(): Subject<NodeModel> {
-    return this.subject;
   }
 
   private static decodeMessage(message: Message): string {
