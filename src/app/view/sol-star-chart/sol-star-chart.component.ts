@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelReadService } from 'src/app/logic/controller/model-read/model-read.service';
+import { WebsocketService } from 'src/app/logic/controller/websocket/websocket.service';
 
 @Component({
   selector: 'app-sol-star-chart',
@@ -8,7 +8,7 @@ import { ModelReadService } from 'src/app/logic/controller/model-read/model-read
 })
 export class SolStarChartComponent implements OnInit {
 
-  constructor(private modelReadService: ModelReadService) {
+  constructor(private websocketService: WebsocketService) {
 
   }
 

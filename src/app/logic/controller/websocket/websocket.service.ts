@@ -9,13 +9,13 @@ import { NodeSubscription } from '../../model/interface/request-type/node-subscr
 @Injectable({
   providedIn: 'root'
 })
-export class ModelReadService {
+export class WebsocketService {
 
-  private static WEBSOCKET_ENDPOINT_URL: Readonly<string> = "http://localhost:8081/ws-endpoint";
+  private static ENDPOINT_URL: Readonly<string> = "http://localhost:8081/ws-endpoint";
 
-  private static WEBSOCKET_BROKER_URL: Readonly<string> = "http://localhost:8081/ws-broker";
+  private static BROKER_URL: Readonly<string> = "http://localhost:8081/ws-broker";
 
-  private static WEBSOCKET_DESTINATION_URL: Readonly<string> = "http://localhost:8081/ws-destination";
+  private static DESTINATION_URL: Readonly<string> = "http://localhost:8081/ws-destination";
 
   private stompClient: CompatClient;
 
@@ -25,7 +25,7 @@ export class ModelReadService {
 
   public constructor() {
     this.stompClient = Stomp.over(function() {
-      return new SockJS(ModelReadService.WEBSOCKET_ENDPOINT_URL);
+      return new SockJS(WebsocketService.ENDPOINT_URL);
     });
 
     this.subject = new Subject<NodeModel>();
@@ -58,11 +58,11 @@ export class ModelReadService {
   //  USER ACCESSIBLE FUNCTIONALITIES  --  END
 
   public wsConnect(): void {
-    const self: ModelReadService = this;
+    const self: WebsocketService = this;
     this.stompClient.configure({
       onConnect: function(frame: any) {
-        self.stompClient.subscribe(ModelReadService.WEBSOCKET_BROKER_URL, function(message: Message) {
-          self.subject.next(JSON.parse(ModelReadService.decodeMessage(message)));
+        self.stompClient.subscribe(WebsocketService.BROKER_URL, function(message: Message) {
+          self.subject.next(JSON.parse(WebsocketService.decodeMessage(message)));
         });
       }
     });
@@ -70,10 +70,10 @@ export class ModelReadService {
   }
 
   private sendNodeSubscription(nodeSubscription: NodeSubscription): void {
-    this.stompClient.send(ModelReadService.WEBSOCKET_DESTINATION_URL, {}, JSON.stringify(nodeSubscription));
+    this.stompClient.send(WebsocketService.DESTINATION_URL, {}, JSON.stringify(nodeSubscription));
   }
 
   private static decodeMessage(message: Message): string {
-    return ModelReadService.TEXT_DECODER.decode(message.binaryBody);
+    return WebsocketService.TEXT_DECODER.decode(message.binaryBody);
   }
 }
