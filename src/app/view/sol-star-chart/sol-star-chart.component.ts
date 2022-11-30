@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebsocketService } from 'src/app/logic/controller/websocket/websocket.service';
 
 @Component({
   selector: 'app-sol-star-chart',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SolStarChartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private websocketService: WebsocketService) {
+
+  }
 
   ngOnInit(): void {
   }

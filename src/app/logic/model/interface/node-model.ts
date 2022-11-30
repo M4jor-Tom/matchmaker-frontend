@@ -5,13 +5,15 @@ import { NodeComponentDynamicProperties } from "./dynamic-component-properties/n
 export interface NodeModel {
     nodeId: NodeId,
     name: string,
-    waitingPlayersCount: number | undefined
+    waitingPlayersCount: number | undefined,
+    isPlayerSubscribed: boolean
 }
 
 export const defaultValue: Readonly<NodeModel> = {
     nodeId: NodeId.NO_ID,
     name: "",
-    waitingPlayersCount: undefined
+    waitingPlayersCount: undefined,
+    isPlayerSubscribed: false
 }
 
 export function cloneDefaultValue(): Readonly<NodeModel> {
