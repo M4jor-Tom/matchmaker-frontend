@@ -25,7 +25,8 @@ export class NodeComponent implements AfterViewInit {
 
   private initDynamics(): void {
     this.nodeDataService.getObservable.subscribe(props => {
-      if(this.baseId === nodeIdToBaseId(this.nodeModel.nodeId)) {
+      console.log(props.baseId + " === " + this.baseId);
+      if(props.baseId === this.baseId) {
         this.nodeModel = nm.updateWithDynamicProperties(this.nodeModel, props);
       }
     });
