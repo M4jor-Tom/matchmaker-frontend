@@ -22,5 +22,6 @@ export function cloneDefaultValue(): Readonly<NodeModel> {
 
 export function updateWithDynamicProperties(nodeModel: NodeModel, nodeComponentDynamicProperties: NodeComponentDynamicProperties): NodeModel {
     nodeModel.waitingPlayersCount = nodeComponentDynamicProperties.waitingPlayersCount;
+    nodeModel.isPlayerSubscribed = nodeComponentDynamicProperties.isPlayerSubscribed;
     return nodeModel;
 }
