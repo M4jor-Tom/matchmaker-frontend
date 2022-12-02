@@ -34,11 +34,4 @@ export class NodeListComponent implements AfterViewInit {
       });
     });
   }
-
-  public get getNodeModels(): NodeModel[] {
-    return [
-      {nodeId: NodeId.NO_ID, name: "someName", waitingPlayersCount: 2, isPlayerSubscribed: true},
-      {nodeId: NodeId.NO_ID, name: "someOtherName", waitingPlayersCount: undefined, isPlayerSubscribed: false}
-    ];
-  }
 }
