@@ -1,10 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Subject } from 'rxjs';
 import { NodeDataService } from 'src/app/base/node/node-data/node-data.service';
 import { WebsocketService } from 'src/app/logic/controller/websocket/websocket.service';
-import { NodeId } from 'src/app/logic/model/enum/node-id';
+import { NodeId, nodeIdToBaseId } from 'src/app/logic/model/enum/node-id';
 import { NodeModel } from 'src/app/logic/model/interface/node-model';
-import { getElementByIdOrThrow } from 'src/app/utils/html-utils';
 
 @Component({
   selector: 'app-node-list',
@@ -25,9 +23,14 @@ export class NodeListComponent implements AfterViewInit {
   }
 
   private initDataTransfert(): void {
+    const self: NodeListComponent = this;
     this.websocketService.getNodeModelSubjects.subscribe(nodeModel => {
       nodeModel.forEach(function(nodeModel: NodeModel) {
-        //NodeDataService.s
+        self.nodeDataService.setProperties = {
+          baseId: nodeIdToBaseId(nodeModel.nodeId),
+          waitingPlayersCount: nodeModel.waitingPlayersCount,
+          isPlayerSubscribed: nodeModel.isPlayerSubscribed
+        }
       });
     });
   }

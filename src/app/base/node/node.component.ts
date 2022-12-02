@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { NodeId } from 'src/app/logic/model/enum/node-id';
+import { nodeIdToBaseId } from 'src/app/logic/model/enum/node-id';
 import * as nm from 'src/app/logic/model/interface/node-model';
 import { NodeDataService } from './node-data/node-data.service';
 
@@ -25,7 +25,9 @@ export class NodeComponent implements AfterViewInit {
 
   private initDynamics(): void {
     this.nodeDataService.getObservable.subscribe(props => {
-      this.nodeModel = nm.updateWithDynamicProperties(this.nodeModel, props);
+      if(this.baseId === nodeIdToBaseId(this.nodeModel.nodeId)) {
+        this.nodeModel = nm.updateWithDynamicProperties(this.nodeModel, props);
+      }
     });
   }
 
@@ -44,11 +46,7 @@ export class NodeComponent implements AfterViewInit {
       : this.nodeModel.waitingPlayersCount.toString();
   }
 
-  public get getSnakeCaseNodeId(): string {
-    return NodeComponent.nodeModelIdToHtmlId(this.nodeModel.nodeId);
-  }
-
-  public static nodeModelIdToHtmlId(nodeId: NodeId): string {
-    return nodeId.toLowerCase().replace("_", "-");
+  public get getBaseId(): string {
+    return nodeIdToBaseId(this.nodeModel.nodeId);
   }
 }
