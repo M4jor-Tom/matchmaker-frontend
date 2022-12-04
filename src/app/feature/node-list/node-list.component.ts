@@ -2,9 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NodeDataService } from 'src/app/base/node/node-data/node-data.service';
 import { WebsocketService } from 'src/app/logic/controller/websocket/websocket.service';
-import { NodeId, nodeIdToBaseId } from 'src/app/logic/model/enum/node-id';
+import { nodeIdToBaseId } from 'src/app/logic/model/enum/node-id';
 import { NodeModel } from 'src/app/logic/model/interface/node-model';
-import { getElementByIdOrThrow } from 'src/app/utils/html-utils';
 
 @Component({
   selector: 'app-node-list',
