@@ -16,10 +16,24 @@ export enum NodeId {
     ORO = "ORO"
 }
 
+export function nodeIdLabelToBaseId(nodeIdLabel: string): string {
+    return nodeIdLabel.toLowerCase().replace("_", "-");
+}
+
+export function baseIdToNodeIdLabel(baseId: string): string {
+    return baseId.toUpperCase().replace("-", "_");
+}
+
 export function nodeIdToBaseId(nodeId: NodeId): string {
-    return nodeId.toLowerCase().replace("_", "-");
+    return nodeIdLabelToBaseId(nodeId.toString());
 }
 
 export function nodeIdToName(nodeId: NodeId): string {
     return nodeId.toLowerCase().replace("_", " ");
+}
+
+export function baseIdToNodeId(baseId: string): NodeId {
+    const nodeIdLabel: string = baseIdToNodeIdLabel(baseId);
+
+    return (<any>NodeId)[nodeIdLabel];
 }
