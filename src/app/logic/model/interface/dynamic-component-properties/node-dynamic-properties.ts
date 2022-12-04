@@ -1,11 +1,15 @@
 import { cloneObject } from "src/app/utils/data-manipulation"
 
 export interface NodeComponentDynamicProperties {
-    waitingPlayersCount: number | undefined
+    baseId: string | undefined,
+    waitingPlayersCount: number | undefined,
+    isPlayerSubscribed: boolean
 }
 
 export const defaultValue: Readonly<NodeComponentDynamicProperties> = {
-    waitingPlayersCount: undefined
+    baseId: undefined,
+    waitingPlayersCount: undefined,
+    isPlayerSubscribed: false
 };
 
 export function cloneDefaultValue(): Readonly<NodeComponentDynamicProperties> {

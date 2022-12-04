@@ -19,7 +19,7 @@ export class WebsocketService {
 
   private stompClient: CompatClient;
 
-  private subject: Subject<NodeModel>;
+  private subject: Subject<NodeModel[]>;
 
   private static TEXT_DECODER: TextDecoder = new TextDecoder();
 
@@ -50,7 +50,7 @@ export class WebsocketService {
   }
 
   //Read
-  public get getNodeModelSubject(): Subject<NodeModel> {
+  public get getNodeModelSubjects(): Subject<NodeModel[]> {
     return this.subject;
   }
 

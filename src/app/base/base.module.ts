@@ -12,6 +12,9 @@ import { NodeComponent } from './node/node.component';
   ],
   imports: [
     NgCoreModule
+  ],
+  exports: [
+    NodeComponent
   ]
 })
 export class BaseModule { }
