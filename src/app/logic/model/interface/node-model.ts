@@ -1,5 +1,5 @@
 import { cloneObject } from "src/app/utils/data-manipulation";
-import { NodeId } from "../enum/node-id";
+import { NodeId, nodeIdToName } from "../enum/node-id";
 import { NodeComponentDynamicProperties } from "./dynamic-component-properties/node-dynamic-properties";
 
 export interface NodeModel {
@@ -23,4 +23,12 @@ export function cloneDefaultValue(): Readonly<NodeModel> {
 export function updateWithDynamicProperties(nodeModel: NodeModel, nodeComponentDynamicProperties: NodeComponentDynamicProperties): NodeModel {
     nodeModel.waitingPlayersCount = nodeComponentDynamicProperties.waitingPlayersCount;
     return nodeModel;
+}
+
+export function newNode(nodeId: NodeId): NodeModel {
+    return {
+        ...cloneDefaultValue(),
+        nodeId: nodeId,
+        name: nodeIdToName(nodeId)
+    }
 }
