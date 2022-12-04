@@ -1,3 +1,5 @@
+import { ucwords } from "src/app/utils/html-utils";
+
 export enum NodeId {
     NO_ID = "NO_ID",
     MARIANA = "MARIANA",
@@ -29,7 +31,7 @@ export function nodeIdToBaseId(nodeId: NodeId): string {
 }
 
 export function nodeIdToName(nodeId: NodeId): string {
-    return nodeId.toLowerCase().replace("_", " ");
+    return ucwords(nodeId.toLowerCase().replace("_", " "));
 }
 
 export function baseIdToNodeId(baseId: string): NodeId {
