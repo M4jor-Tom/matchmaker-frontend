@@ -54,7 +54,7 @@ export class NodeListComponent implements AfterViewInit, OnDestroy {
           throw new Error("elementId is null");
         }
 
-        self.websocketService.subscribeToNodeOfId(baseIdToNodeId(elementId));
+        self.websocketService.sendClick(baseIdToNodeId(elementId));
       });
     });
   }

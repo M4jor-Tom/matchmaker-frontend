@@ -4,7 +4,8 @@ import { ActivationState, Client, CompatClient, IFrame, IMessage, Message, Stomp
 import * as SockJS from 'sockjs-client';
 import { NodeModel } from 'src/app/logic/model/interface/node-model';
 import { NodeId } from '../../model/enum/node-id';
-import { NodeSubscription } from '../../model/interface/request-type/node-subscription';
+import { Action } from '../../model/interface/request-type/action';
+import { ActionType } from '../../model/interface/request-type/action-type';
 
 @Injectable({
   providedIn: 'root'
@@ -33,20 +34,10 @@ export class WebsocketService {
 
   //  USER ACCESSIBLE FUNCTIONALITIES  --  START
   
-  //Write
-  public subscribeToNodeOfId(nodeId: NodeId): void {
-    this.sendNodeSubscription({
-      nodeId: nodeId,
-      ifTrueAddElseRemove: true
-    });
-  }
-
-  //Write
-  public unsubscribeFromNodeOfId(nodeId: NodeId): void {
-    this.sendNodeSubscription({
-      nodeId: nodeId,
-      ifTrueAddElseRemove: false
-    });
+  //Click
+  public sendClick(nodeId: NodeId): void {
+    const action: Action = {nodeId: nodeId, actionType: ActionType.CLICK};
+    this.stompClient.send(WebsocketService.DESTINATION_URL, {}, JSON.stringify(action));
   }
 
   //Read
@@ -104,10 +95,6 @@ export class WebsocketService {
 
   public wsDisconnect() {
     this.stompClient.disconnect();
-  }
-
-  private sendNodeSubscription(nodeSubscription: NodeSubscription): void {
-    this.stompClient.send(WebsocketService.DESTINATION_URL, {}, JSON.stringify(nodeSubscription));
   }
 
   private static decodeMessage(message: Message): string {
