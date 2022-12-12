@@ -91,6 +91,7 @@ export class WebsocketService {
         console.warn("onUnhandledReceipt: " + receipt.body);
       }
     });
+    this.stompClient.reconnect_delay = 10000;
     this.stompClient.activate();
   }
 
