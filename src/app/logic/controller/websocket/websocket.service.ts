@@ -14,9 +14,10 @@ export class WebsocketService {
 
   private static ENDPOINT_URL: Readonly<string> = "http://localhost:8081/ws-endpoint";
 
-  private static BROKER_URL: Readonly<string> = "/ws-broker";
+  private static BROKER_URL: Readonly<string> = "/user/secured/ws-user";
+  // private static BROKER_URL: Readonly<string> = "/secured/ws-user";
 
-  private static DESTINATION_URL: Readonly<string> = "/ws-destination";
+  private static DESTINATION_URL: Readonly<string> = "/secured/ws-room";
 
   private stompClient: CompatClient;
 
@@ -53,7 +54,7 @@ export class WebsocketService {
       onConnect: function(frame: IFrame) {
         // frame.headers = {"server": "matchmaker-backend"};
         console.log("onConnect: " + frame.body);
-        self.stompClient.subscribe(WebsocketService.BROKER_URL, function(message: Message) {
+        self.stompClient.subscribe(self.getBrokerUrl, function(message: Message) {
           self.subject.next(JSON.parse(WebsocketService.decodeMessage(message)));
         });
       },
@@ -95,6 +96,16 @@ export class WebsocketService {
 
   public wsDisconnect() {
     this.stompClient.disconnect();
+  }
+
+  private get getBrokerUrl(): string {
+    console.log("Your current session is: " + WebsocketService.getSessionIdFromUrl(this.stompClient.ws._transport.url)); //TODO Remove log
+    return WebsocketService.BROKER_URL + "-user" + WebsocketService.getSessionIdFromUrl(this.stompClient.ws._transport.url);
+  }
+
+  private static getSessionIdFromUrl(url: string): string {
+    const split: string[] = url.split("/");
+    return split[split.length - 2];
   }
 
   private static decodeMessage(message: Message): string {
